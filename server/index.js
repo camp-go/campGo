@@ -1,11 +1,11 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-var db = require("./database-mongo/Item.model.js");
+var db = require("./database-mongo/index.js");
 const{Item,selectAll} = require("./database-mongo/Item.model.js")
 
 var app = express();
 app.use(express.json());
-app.use(express.static(__dirname + "/../react-client/dist"));
+app.use(express.static(__dirname + "/../client/public"));
 app.use(express.urlencoded({ extended: false}))
 
 app.get("/items", function (req, res) {

@@ -1,28 +1,15 @@
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+const mongoose = require("mongoose");
+const db = require("./index.js");
 
-var db = mongoose.connection;
-
-db.on('error', function() {
-  console.log('mongoose connection error');
-});
-
-db.once('open', function() {
-  console.log('mongoose connected successfully');
-});
-
-var itemSchema = mongoose.Schema({
-  name: String,
+const itemSchema = new mongoose.Schema({
+  nameSite: String,
   localisation: String,
   imageUrl: String,
-  description: String,
-  size: Number,
+  capacity: String,
   price: Number,
-  contact: String
+  phone: Number,
+  email: String
 });
-
-
-var Item = mongoose.model('Item', itemSchema);
 
 var selectAll = function(callback) {
   Item.find({}, function(err, items) {
@@ -34,4 +21,12 @@ var selectAll = function(callback) {
   });
 };
 
-module.exports= {selectAll,Item};
+// const db = mongoose.connection;
+// db.on("error", console.error.bind(console, "connection error: "));
+// db.once("open", function () {
+//   console.log("Connected successfully");
+// });
+
+const Item = mongoose.model("Item", itemSchema);
+
+module.exports = {Item, selectAll};
