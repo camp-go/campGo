@@ -1,7 +1,10 @@
 import React from "react"
 
-const Login = () => (
+const Login = (props) => (
     <div>
+        {props.toggleAdmin ? 
+                  
+                
         <form>
             <div className="row mb-3">
                 <label for="inputEmail" className="col-sm-2 col-form-label">Email</label>
@@ -29,6 +32,7 @@ const Login = () => (
                 </div>
             </div>
         </form>
+        : <div></div>} 
     </div>
 )
 

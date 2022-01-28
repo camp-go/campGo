@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var db = require("./database-mongo/index.js");
-const{Item,selectAll} = require("./database-mongo/Item.model.js")
+const{Item,Booking,selectAll} = require("./database-mongo/Item.model.js")
 
 var app = express();
 app.use(express.json());
@@ -21,6 +21,20 @@ app.get("/items", function (req, res) {
 app.post("/items", (req,res)=>{
   console.log(req.body)
 Item.create(req.body)
+    .then(function(){
+      selectAll(function (err,data){
+        if(err){
+          // res.sendStatus(500)
+        } else {
+          res.json(data)
+        }
+      })})
+      .catch(err=>console.log('you have an error', err))
+})
+
+app.post("/books", (req,res)=>{
+  console.log(req.body)
+Booking.create(req.body)
     .then(function(){
       selectAll(function (err,data){
         if(err){

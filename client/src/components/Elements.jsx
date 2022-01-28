@@ -21,7 +21,7 @@ const Elements = (props) => {
                             <p>phone number: {item.phone}</p>
                             <p>email: {item.email}</p>
                     <div className="d-grid gap-2">
-                        <button type="button" className="btn btn-primary" onClick={()=>props.changeView()}>done!</button>
+                        <button type="button" className="btn btn-primary" onClick={()=>props.changeView()}>Book!</button>
                     </div>
                         </div>
 

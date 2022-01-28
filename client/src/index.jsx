@@ -11,9 +11,11 @@ class App extends React.Component {
     super(props);
     this.state = {
       items: [],
-      toggle: true
+      toggle: true,
+      toggleAdmin: false
     }
     this.changeView=this.changeView.bind(this)
+    this.changeViewLogin=this.changeViewLogin.bind(this)
   }
 
   componentDidMount(){
@@ -40,13 +42,16 @@ class App extends React.Component {
     })
   }
 
+  changeViewLogin(){
+    this.setState({
+      toggleAdmin: !this.state.toggleAdmin
+    })
+  }
+
   render() {
     console.log(this.state);
     return (
       <div>
-      {this.state.toggle ?
-      <div>
-
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -63,12 +68,15 @@ class App extends React.Component {
                 </div>
                 <div className="navbar-nav ms-auto">
                   <a href="#" className="nav-item nav-link">Register</a>
-                  <a href="#" className="nav-item nav-link">Login</a>
+                  <a className="nav-item nav-link" onClick={this.changeViewLogin}>Login</a>
+                  <Login toggleAdmin={this.state.toggleAdmin}/>
                 </div>
               </div>
             </div>
           </nav>
         </div>
+      {this.state.toggle ?
+      <div>
         <div>
         <Elements items={this.state.items} changeView={this.changeView} />
           <div>

@@ -1,12 +1,35 @@
+import axios from 'axios'
 import React from 'react'
 
 class Booking extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            books: [],
+            fName: '',
+            lName:'',
+            email: '',
+            campSite: '',
+            nbrNights: '',
+            date: '',
+            phoneNb: '',
         }
+        this.handleSubmit=this.handleSubmit.bind(this)
+        this.handleChange=this.handleChange.bind(this)
     }
+
+    handleChange = (event)=>{
+        this.setState({
+          [event.target.name]: event.target.value
+        });
+      }
+    
+      handleSubmit(event) {
+        // event.preventDefault();
+        axios.post("/books", this.state).then(({ data }) => {
+          console.log(data);
+        });
+      }
 
     render() {
         return (
@@ -21,31 +44,31 @@ class Booking extends React.Component {
                                 <div className="row g-3">
                                     <div className="col-6">
                                     <label className="form-label" >First Name</label>
-                                        <input type="text" className="form-control" placeholder="First Name" />
+                                        <input type="text" className="form-control" placeholder="First Name" name="fName" value={this.state.fName} onChange={this.handleChange}/>
                                     </div>
                                     <div className="col-2">
                                     <label className="form-label" for="inputEmail">Last Name</label>
-                                        <input type="text" className="form-control" placeholder="Last Name"/>
+                                        <input type="text" className="form-control" placeholder="Last Name" name="lName" value={this.state.lName} onChange={this.handleChange}/>
                                     </div>
                                 </div>
                                 <label className="form-label" for="inputEmail">Email</label>
-                                <input type="email" className="form-control" id="inputEmail" placeholder="Email" />
+                                <input type="email" className="form-control" id="inputEmail" placeholder="Email" name="email" value={this.state.email} onChange={this.handleChange}/>
                             </div>
                             <div className="row g-3">
                                     <div className="col-6">
                                     <label className="form-label" >camp Site</label>
-                                        <input type="text" className="form-control" placeholder="Camp Site" />
+                                        <input type="text" className="form-control" placeholder="Camp Site" name="campSite" value={this.state.campSite} onChange={this.handleChange}/>
                                     </div>
                                     <div className="col-2">
                                     <label className="form-label" for="inputEmail">Nbr of Nights</label>
-                                        <input type="text" className="form-control" placeholder="Nbr of Nights"/>
+                                        <input type="text" className="form-control" placeholder="Nbr of Nights" name="nbrNights" value={this.state.nbrNights} onChange={this.handleChange}/>
                                     </div>
                                     <div className="col-2">
                                     <label className="form-label" for="inputEmail">Phone Number</label>
-                                        <input type="text" className="form-control" placeholder="Phone Number"/>
+                                        <input type="text" className="form-control" placeholder="Phone Number" name="phoneNb" value={this.state.phoneNb} onChange={this.handleChange}/>
                                     </div>
                                 </div>
-                            <button type="submit" className="btn btn-primary">Sign in</button>
+                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit()}>Done!</button>
                         </form>
                     </div>
                 </div>
