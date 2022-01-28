@@ -11,6 +11,15 @@ const itemSchema = new mongoose.Schema({
   email: String
 });
 
+const bookingSchema = new mongoose.Schema({
+  fName: String,
+  lName: String,
+  email: String,
+  campSite: String,
+  nbrNights: Number,
+  date: Date,
+  phoneNb: Number,
+})
 var selectAll = function(callback) {
   Item.find({}, function(err, items) {
     if(err) {
@@ -28,5 +37,5 @@ var selectAll = function(callback) {
 // });
 
 const Item = mongoose.model("Item", itemSchema);
-
-module.exports = {Item, selectAll};
+const Booking = mongoose.model("Booking", bookingSchema)
+module.exports = {Item, Booking ,selectAll};
