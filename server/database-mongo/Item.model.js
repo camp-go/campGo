@@ -1,22 +1,37 @@
-const mongoose = require("mongoose");
-const db = require("./index.js");
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
 
-const itemSchema = new mongoose.Schema({
-  nameSite: String,
+var db = mongoose.connection;
+
+db.on('error', function() {
+  console.log('mongoose connection error');
+});
+
+db.once('open', function() {
+  console.log('mongoose connected successfully');
+});
+
+var itemSchema = mongoose.Schema({
+  name: String,
   localisation: String,
   imageUrl: String,
-  capacity: String,
+  description: String,
+  size: Number,
   price: Number,
-  phone: Number,
-  email: String
+  contact: String
 });
 
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function () {
-  console.log("Connected successfully");
-});
 
-const Item = mongoose.model("Item", itemSchema);
+var Item = mongoose.model('Item', itemSchema);
 
-module.exports = Item;
+var selectAll = function(callback) {
+  Item.find({}, function(err, items) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, items);
+    }
+  });
+};
+
+module.exports= {selectAll,Item};

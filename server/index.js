@@ -1,20 +1,37 @@
-const express = require("express");
-const itemRoutes = require('./routes/item.routes')
-// TODO: Update this
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('./database-mysql');
-var items = require('./database-mongo');
+var express = require("express");
+var bodyParser = require("body-parser");
+var db = require("./database-mongo/Item.model.js");
+const{Item,selectAll} = require("./database-mongo/Item.model.js")
 
-const app = express();
-const PORT = process.env.PORT || 3000
-
-
+var app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../client/public"));
+app.use(express.static(__dirname + "/../react-client/dist"));
+app.use(express.urlencoded({ extended: false}))
 
-app.use("/api/items", itemRoutes);
+app.get("/items", function (req, res) {
+  selectAll(function (err, data) {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data);
+    }
+  });
+});
 
-app.listen(PORT, function () {
+app.post("/items", (req,res)=>{
+  console.log(req.body)
+Item.create(req.body)
+    .then(function(){
+      selectAll(function (err,data){
+        if(err){
+          // res.sendStatus(500)
+        } else {
+          res.json(data)
+        }
+      })})
+      .catch(err=>console.log('you have an error', err))
+})
+
+app.listen(3000, function () {
   console.log("listening on port 3000!");
 });
