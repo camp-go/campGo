@@ -5,6 +5,7 @@ import List from './components/List.jsx';
 import Elements from './components/Elements.jsx'
 import Login from './components/login.jsx';
 import Booking from './components/booking.jsx';
+import Admin from './components/AdminTable.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -48,6 +49,8 @@ class App extends React.Component {
     })
   }
 
+  
+
   render() {
     console.log(this.state);
     return (
@@ -69,11 +72,12 @@ class App extends React.Component {
                 <div className="navbar-nav ms-auto">
                   <a href="#" className="nav-item nav-link">Register</a>
                   <a className="nav-item nav-link" onClick={this.changeViewLogin}>Login</a>
-                  <Login toggleAdmin={this.state.toggleAdmin}/>
+          
                 </div>
               </div>
             </div>
           </nav>
+          <Login toggleAdmin={this.state.toggleAdmin}/>
         </div>
       {this.state.toggle ?
       <div>
@@ -96,7 +100,6 @@ class App extends React.Component {
         </div>
       </div>
        :
-    
           <div>
             <Booking />
           </div>

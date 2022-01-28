@@ -46,6 +46,34 @@ Booking.create(req.body)
       .catch(err=>console.log('you have an error', err))
 })
 
+app.delete('/removeItems/:id', function(req,res){
+  let id=req.params._id
+  console.log(id);
+  console.log(obj);
+  Item.findByIdAndRemove({_id: id}, (err,result)=>{
+    if(err){
+      console.log(err);
+    } else {
+      console.log(result);
+    }
+  })
+})
+
+app.put('/updateItems/:id', function (req, res){
+  let _id= req.params._id
+  let obj= req.body
+  console.log(obj);
+  console.log(_id);
+  Item.findByIdAndUpdate({_id}, obj, (err, result)=>{
+    if(err){
+      console.log(err);
+    } else {
+      res.send(result)
+    }
+  })
+})
+
+
 app.listen(3000, function () {
   console.log("listening on port 3000!");
 });
