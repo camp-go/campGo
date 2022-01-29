@@ -3,7 +3,9 @@ import React from 'react'
 const Elements = (props) => {
     return (
         <div>
+            <div>
 
+            </div>
             <div className="container">
                 <div className="p-5 my-4 bg-light rounded-3">
                     <div>
@@ -40,7 +42,7 @@ const Elements = (props) => {
                         <div className="col-md-6 col-lg-4 col-xl-3" key={i}>
                             <h2>{item.nameSite}</h2>
                             <p>in: {item.localisation}</p>
-                            <img src={item.imageUrl} />
+                            <img className='imgsize' src={item.imageUrl} />
                             <p>capacity: {item.capacity}</p>
                             <p>price/night: {item.price}</p>
                             <p>phone number: {item.phone}</p>

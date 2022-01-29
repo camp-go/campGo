@@ -59,7 +59,7 @@ class App extends React.Component {
         <div>
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-              <a href="#" className="navbar-brand">camp go</a>
+              <a href="#" className="navbar-brand">Camp Go</a>
               <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span className="navbar-toggler-icon"></span>
               </button>

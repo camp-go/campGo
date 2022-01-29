@@ -9,6 +9,7 @@ class Admin extends React.Component {
             toggle: true
         }
         this.remove = this.remove.bind(this)
+        this.update = this.update.bind(this)
     }
 
     remove(_id) {
