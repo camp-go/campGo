@@ -24,10 +24,11 @@ class AddItems extends React.Component {
         })
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
+        
         axios.post('/campsites', this.state)
             .then(({ data }) => {
-                console.log(data);
+                console.log("campsites",data);
             })
     }
 
@@ -73,7 +74,7 @@ class AddItems extends React.Component {
                                     </div>
 
                                 </div>
-                                <button type="submit" className="btn btn-primary" onClick={this.handleSubmit()}>Done!</button>
+                                <button type="button" className="btn btn-primary" onClick={()=>{this.handleSubmit()}}>Done!</button>
                             </form>
                         </div>
                     </div>

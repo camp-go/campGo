@@ -18,48 +18,48 @@ app.get("/items", function (req, res) {
   });
 });
 
-app.post("/items", (req,res)=>{
-  console.log(req.body)
-Item.create(req.body)
-    .then(function(){
-      selectAll(function (err,data){
-        if(err){
-          // res.sendStatus(500)
-        } else {
-          res.json(data)
-        }
-      })})
-      .catch(err=>console.log('you have an error', err))
-})
-
 app.post("/campsites", (req,res)=>{
   console.log(req.body)
-Booking.create(req.body)
-    .then(function(){
-      selectAll(function (err,data){
+Item.create(req.body)
+    .then(function(err, data){
         if(err){
-          // res.sendStatus(500)
+          res.sendStatus(500)
         } else {
-          res.json(data)
+          console.log("sucsess");
+          res.send(data)
         }
-      })})
+      })
       .catch(err=>console.log('you have an error', err))
 })
-
 
 app.post("/books", (req,res)=>{
-  console.log(req.body)
+  console.log("body",req.body)
 Booking.create(req.body)
-    .then(function(){
-      selectAll(function (err,data){
+    .then(function(err, data){
         if(err){
-          // res.sendStatus(500)
+         console.log("error");
         } else {
-          res.json(data)
+          console.log("booked");
+          res.send(data)
         }
-      })})
+      })
       .catch(err=>console.log('you have an error', err))
 })
+
+
+// app.post("/books", (req,res)=>{
+//   console.log(req.body)
+// Booking.create(req.body)
+//     .then(function(){
+//       selectAll(function (err,data){
+//         if(err){
+//           // res.sendStatus(500)
+//         } else {
+//           res.json(data)
+//         }
+//       })})
+//       .catch(err=>console.log('you have an error', err))
+// })
 
 app.delete('/removeItems/:id', function(req,res){
   let id=req.params.id

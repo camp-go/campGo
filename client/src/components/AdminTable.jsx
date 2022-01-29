@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import AddItems from './AddItems.jsx';
 
 class Admin extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-
+            toggle: true
         }
         this.remove = this.remove.bind(this)
     }
@@ -32,7 +33,11 @@ class Admin extends React.Component {
         }).catch((error) => {
             console.log(error)
         })
-        componentDidMount()
+    }
+    changeView(){
+        this.setState({
+            toggle: !this.state.toggle
+        })
     }
 
     render() {
@@ -71,7 +76,6 @@ class Admin extends React.Component {
                                         {
                                             this.props.items.map((elem, i) => (
                                                 <div>
-
                                                     <tr>
                                                         <td>
                                                             <span class="custom-checkbox">
@@ -79,13 +83,21 @@ class Admin extends React.Component {
                                                                 <label for="checkbox1"></label>
                                                             </span>
                                                         </td>
-
-                                                        <td>{elem.nameSite}</td>
-                                                        <td>{elem.localisation}</td>
-                                                        <td>yoyo</td>
-                                                        <td>(171) 555-2222</td>
+                                                        {this.state.toggle ?
+                                                            <div>
+                                                            <td>{elem.nameSite}</td>
+                                                            <td>{elem.localisation}</td>
+                                                            <td>yoyo</td>
+                                                            <td>(171) 555-2222</td>
+                                                            </div>
+                                                        : 
+                                                        <div>
+                                                            <input type="text"  />
+                                                            <button className="btn btn-primary">done!</button>
+                                                        </div>
+                                                        }
                                                         <td>
-                                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit" onClick={()=>{this.update(elem._id) , this.changeView()}}>update</i></a>
                                                             <a class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete" onClick={()=>{this.remove(elem._id)}}>delete</i></a>
                                                         </td>
                                                     </tr>
@@ -190,6 +202,9 @@ class Admin extends React.Component {
                         </div>
                     </div>
                 </body>
+                <div>
+                <AddItems />
+                </div>
             </div>
         )
     }

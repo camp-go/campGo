@@ -24,8 +24,7 @@ class Booking extends React.Component {
         });
       }
     
-      handleSubmit(event) {
-        // event.preventDefault();
+      handleSubmit() {
         axios.post("/books", this.state).then(({ data }) => {
           console.log(data);
         });
@@ -68,7 +67,7 @@ class Booking extends React.Component {
                                         <input type="text" className="form-control" placeholder="Phone Number" name="phoneNb" value={this.state.phoneNb} onChange={this.handleChange}/>
                                     </div>
                                 </div>
-                            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit()}>Done!</button>
+                            <button type="button" className="btn btn-primary" onClick={()=>{this.handleSubmit()}}>Done!</button>
                         </form>
                     </div>
                 </div>

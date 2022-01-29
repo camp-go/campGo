@@ -71,7 +71,6 @@ class App extends React.Component {
                   <a href="#" className="nav-item nav-link">Contact</a>
                 </div>
                 <div className="navbar-nav ms-auto">
-                  <a href="#" className="nav-item nav-link">Register</a>
                   <a className="nav-item nav-link" onClick={this.changeViewLogin}>Login</a>
           
                 </div>
@@ -105,10 +104,10 @@ class App extends React.Component {
             <Booking />
           </div>
       }
-              <AddItems />
+
       </div>      
      )
   }
 }
 
-        ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
