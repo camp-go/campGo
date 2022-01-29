@@ -1,21 +1,24 @@
 import React from 'react';
+import axios from 'axios';
 
 class Admin extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+
         }
-        
+        this.remove = this.remove.bind(this)
     }
 
     remove(_id) {
-        axios.delete('/removeItems' + _id)
+        console.log(_id);
+        axios.delete(`/removeItems/${_id}`)
             .then((response) => {
                 console.log(response)
             }).catch((error) => {
                 console.log(error)
             })
-        componentDidMount()
+        
     }
 
     update(_id) {
@@ -33,6 +36,7 @@ class Admin extends React.Component {
     }
 
     render() {
+        console.log(this.props.items, "admin");
         return (
             <div>
                 <body>
@@ -63,22 +67,33 @@ class Admin extends React.Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <span class="custom-checkbox">
-                                                    <input type="checkbox" id="checkbox1" name="options[]" value="1" />
-                                                    <label for="checkbox1"></label>
-                                                </span>
-                                            </td>
-                                            <td>Thomas Hardy</td>
-                                            <td>thomashardy@mail.com</td>
-                                            <td>89 Chiaroscuro Rd, Portland, USA</td>
-                                            <td>(171) 555-2222</td>
-                                            <td>
-                                                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                            </td>
-                                        </tr>
+
+                                        {
+                                            this.props.items.map((elem, i) => (
+                                                <div>
+
+                                                    <tr>
+                                                        <td>
+                                                            <span class="custom-checkbox">
+                                                                <input type="checkbox" id="checkbox1" name="options[]" value="1" />
+                                                                <label for="checkbox1"></label>
+                                                            </span>
+                                                        </td>
+
+                                                        <td>{elem.nameSite}</td>
+                                                        <td>{elem.localisation}</td>
+                                                        <td>yoyo</td>
+                                                        <td>(171) 555-2222</td>
+                                                        <td>
+                                                            <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                            <a class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete" onClick={()=>{this.remove(elem._id)}}>delete</i></a>
+                                                        </td>
+                                                    </tr>
+                                                </div>
+                                            ))
+                                        }
+
+
                                     </tbody>
                                 </table>
 

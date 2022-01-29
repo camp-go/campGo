@@ -6,6 +6,7 @@ class Login extends React.Component {
         super(props)
         this.state={
             view:"",
+           
         }
         this.changeView=this.changeView.bind(this)
     }
@@ -17,10 +18,11 @@ class Login extends React.Component {
     }
     renderView(){
         if(this.state.view=== "signin"){
-            return <AdminTable /> 
+            return <AdminTable items={this.props.items}/> 
         }
     }
     render(){
+        console.log(this.props.items);
         return(
             <div>
             {this.props.toggleAdmin ? 

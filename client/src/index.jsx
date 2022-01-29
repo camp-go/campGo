@@ -6,6 +6,7 @@ import Elements from './components/Elements.jsx'
 import Login from './components/login.jsx';
 import Booking from './components/booking.jsx';
 import Admin from './components/AdminTable.jsx'
+import AddItems from './components/AddItems.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class App extends React.Component {
     })
   }
 
-  
+
 
   render() {
     console.log(this.state);
@@ -77,7 +78,7 @@ class App extends React.Component {
               </div>
             </div>
           </nav>
-          <Login toggleAdmin={this.state.toggleAdmin}/>
+          <Login toggleAdmin={this.state.toggleAdmin} items={this.state.items}/>
         </div>
       {this.state.toggle ?
       <div>
@@ -104,6 +105,7 @@ class App extends React.Component {
             <Booking />
           </div>
       }
+              <AddItems />
       </div>      
      )
   }
